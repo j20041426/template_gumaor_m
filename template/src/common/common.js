@@ -12,13 +12,20 @@ global.common = {
   },
 
   init(callback) {
-    // TODO 授权验证
-    callback();
+    const local_token = store.get('token');
+    const url_token = common.getQueryString("token");
+    let _token = url_token ? url_token : local_token;
+    if (!_token) {
+      common.jumpAuth();
+    } else {
+      store.set('token');
+      callback && callback();
+    }
   },
 
   //设置页面title
   setTitle(title) {
-    document.title = title || '博物馆智慧报表';
+    document.title = title || '古猫移动端';
     common.hackTitle();
   },
   //解决ios中js设置document.title 的bug
@@ -97,9 +104,6 @@ global.common = {
     }).catch((action) => {
       //cancel, do nothing...
     });
-  },
-  notfound: function () {
-    common.alert("您所访问的资源不存在！");
   },
 
   getH() {

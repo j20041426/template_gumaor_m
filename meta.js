@@ -80,33 +80,6 @@ module.exports = {
       type: 'confirm',
       message: '是否启用测试环境？',
     },
-    lint: {
-      when: 'isNotTest',
-      type: 'confirm',
-      message: '是否使用ESLint？',
-    },
-    lintConfig: {
-      when: 'isNotTest && lint',
-      type: 'list',
-      message: '选择ESLint预设规则',
-      choices: [
-        {
-          name: 'Standard (https://github.com/standard/standard)',
-          value: 'standard',
-          short: 'Standard',
-        },
-        {
-          name: 'Airbnb (https://github.com/airbnb/javascript)',
-          value: 'airbnb',
-          short: 'Airbnb',
-        },
-        {
-          name: '无（自己配置）',
-          value: 'none',
-          short: 'none',
-        },
-      ],
-    },
     unit: {
       when: 'isNotTest',
       type: 'confirm',
@@ -164,17 +137,6 @@ module.exports = {
     },
   },
   filters: {
-    '.eslintrc.js': 'lint',
-    '.eslintignore': 'lint',
-    'config/test.env.js': 'unit || e2e',
-    'build/webpack.test.conf.js': "unit && runner === 'karma'",
-    'test/unit/**/*': 'unit',
-    'test/unit/index.js': "unit && runner === 'karma'",
-    'test/unit/jest.conf.js': "unit && runner === 'jest'",
-    'test/unit/karma.conf.js': "unit && runner === 'karma'",
-    'test/unit/specs/index.js': "unit && runner === 'karma'",
-    'test/unit/setup.js': "unit && runner === 'jest'",
-    'test/e2e/**/*': 'e2e',
     'src/router.js': 'router',
     'build/testing.js': 'testing',
     'webpack.testing.conf.js': 'testing',
